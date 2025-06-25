@@ -1,19 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Website for my dad</title>
+  <meta charset="UTF-8">
+  <title>Dad Site</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #222;
+      padding: 10px 0;
+      margin-bottom: 2rem;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-list li a {
+      color: #0f0;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-list li a:hover {
+      color: #afa;
+      text-decoration: underline;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2.5rem;
+    }
+
+    .intro {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: disc;
+      text-align: left;
+      max-width: 500px;
+      margin: 2rem auto;
+      padding-left: 1.5rem;
+    }
+
+    ul li {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    ul li a {
+      color: #0f0;
+      text-decoration: none;
+    }
+
+    ul li a:hover {
+      text-decoration: underline;
+      color: #afa;
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <ul class="nav-list">
+      <li><a href="https://baller300000.github.io/dad-site/">Dad Dashboard</a></li>
+      <li><a href="https://baller300000.github.io/snake-site/">Snake Game</a></li>
+    </ul>
+  </nav>
+
   <h1>Hello Dad</h1>
-  <p>This site was made from WSL Fedora and uploaded to GitHub Pages</p>
-  <p>It was also made by Lambros V. I love you Dad!</p>
-  <p>Goodbye! Ill send request for more time, okay?</p>
-  <p>
-   Visit my Dad's Dashboard:  
-    <a href="https://baller300000.github.io/dad-site/" target="_blank" rel="noopener noreferrer">
-      Dad's Dashboard
-    </a>
-  </p>
-  
+
+  <div class="intro">
+    This site was made from <strong>WSL Fedora</strong> and uploaded to <strong>GitHub Pages</strong>.<br><br>
+    It was also made by <strong>Lambros V.</strong> I love you Dad!<br><br>
+    Goodbye!
+  </div>
+
+  <ul>
+    <li><a href="https://baller300000.github.io/dad-site/">Dad Dashboard</a></li>
+    <li><a href="https://baller300000.github.io/snake-site/">Snake Game</a></li>
+  </ul>
 </body>
 </html>
+
