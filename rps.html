@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Rock Paper Scissors Shoot</title>
+<style>
+  body {
+    background: #222;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  .choices button {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #444;
+    color: #eee;
+    transition: background-color 0.3s ease;
+  }
+  .choices button:hover {
+    background: #0a74da;
+  }
+  #result {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+  }
+  #scoreboard {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+  button#restart {
+    margin-top: 2rem;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    background: #0a74da;
+    color: white;
+    cursor: pointer;
+  }
+  button#restart:hover {
+    background: #005ea8;
+  }
+</style>
+</head>
+<body>
+  <h1>Rock Paper Scissors Shoot</h1>
+  <div class="choices">
+    <button data-choice="rock"> Rock</button>
+    <button data-choice="paper">Paper</button>
+    <button data-choice="scissors">cissors</button>
+  </div>
+
+  <div id="result"></div>
+  <div id="scoreboard">Player: 0 | Computer: 0</div>
+  <button id="restart" style="display:none;">Restart Game</button>
+
+<script>
+  const buttons = document.querySelectorAll(".choices button");
+  const resultDiv = document.getElementById("result");
+  const scoreboard = document.getElementById("scoreboard");
+  const restartBtn = document.getElementById("restart");
+
+  let playerScore = 0;
+  let computerScore = 0;
+  let gameOver = false;
+
+  function computerPlay() {
+    const choices = ["rock", "paper", "scissors"];
+    return choices[Math.floor(Math.random() * 3)];
+  }
+
+  function playRound(playerSelection) {
+    if (gameOver) return;
+
+    const computerSelection = computerPlay();
+
+    let outcome = "";
+
+    if (playerSelection === computerSelection) {
+      outcome = `It's a tie! You both chose ${playerSelection}.`;
+    } else if (
+      (playerSelection === "rock" && computerSelection === "scissors") ||
+      (playerSelection === "paper" && computerSelection === "rock") ||
+      (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+      playerScore++;
+      outcome = `You win! ${playerSelection} beats ${computerSelection}.`;
+    } else {
+      computerScore++;
+      outcome = `You lose! ${computerSelection} beats ${playerSelection}.`;
+    }
+
+    resultDiv.textContent = outcome;
+    scoreboard.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
+
+    checkGameOver();
+  }
+
+  function checkGameOver() {
+    if (playerScore >= 5) {
+      resultDiv.textContent = "Congratulations! You won the game! ";
+      gameOver = true;
+      restartBtn.style.display = "inline-block";
+    } else if (computerScore >= 5) {
+      resultDiv.textContent = "Game over! The computer won. Try again!";
+      gameOver = true;
+      restartBtn.style.display = "inline-block";
+    }
+  }
+
+  function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    gameOver = false;
+    resultDiv.textContent = "";
+    scoreboard.textContent = `Player: 0 | Computer: 0`;
+    restartBtn.style.display = "none";
+  }
+
+  buttons.forEach(button =>
+    button.addEventListener("click", () => playRound(button.dataset.choice))
+  );
+
+  restartBtn.addEventListener("click", restartGame);
+</script>
+</body>
+</html>
+
