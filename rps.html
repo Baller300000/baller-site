@@ -2,19 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Rock Paper Scissors Shoot</title>
+<title>Rock Paper Scissors Shoot - ASCII Art</title>
 <style>
   body {
-    background: #222;
+    background: #111;
     color: #eee;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     text-align: center;
     padding: 2rem;
+    white-space: pre;
   }
   h1 {
     margin-bottom: 1rem;
+    font-family: 'Courier New', Courier, monospace;
   }
   .choices button {
+    font-family: 'Courier New', Courier, monospace;
     font-size: 1.5rem;
     margin: 0 10px;
     padding: 15px 25px;
@@ -30,7 +33,8 @@
   }
   #result {
     margin-top: 2rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    white-space: pre-wrap;
   }
   #scoreboard {
     margin-top: 1rem;
@@ -54,9 +58,9 @@
 <body>
   <h1>Rock Paper Scissors Shoot</h1>
   <div class="choices">
-    <button data-choice="rock"> Rock</button>
+    <button data-choice="rock">Rock</button>
     <button data-choice="paper">Paper</button>
-    <button data-choice="scissors">cissors</button>
+    <button data-choice="scissors">Scissors</button>
   </div>
 
   <div id="result"></div>
@@ -73,6 +77,33 @@
   let computerScore = 0;
   let gameOver = false;
 
+  const asciiArt = {
+    rock: `
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+`,
+    paper: `
+     _______
+---'    ____)____
+           ______)
+          _______)
+         _______)
+---.__________)
+`,
+    scissors: `
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+`
+  };
+
   function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * 3)];
@@ -85,18 +116,22 @@
 
     let outcome = "";
 
+    // Show ASCII art for choices
+    outcome += "You chose:\n" + asciiArt[playerSelection] + "\n";
+    outcome += "Computer chose:\n" + asciiArt[computerSelection] + "\n";
+
     if (playerSelection === computerSelection) {
-      outcome = `It's a tie! You both chose ${playerSelection}.`;
+      outcome += "It's a tie! You both chose " + playerSelection + ".";
     } else if (
       (playerSelection === "rock" && computerSelection === "scissors") ||
       (playerSelection === "paper" && computerSelection === "rock") ||
       (playerSelection === "scissors" && computerSelection === "paper")
     ) {
       playerScore++;
-      outcome = `You win! ${playerSelection} beats ${computerSelection}.`;
+      outcome += `You win! ${playerSelection} beats ${computerSelection}.`;
     } else {
       computerScore++;
-      outcome = `You lose! ${computerSelection} beats ${playerSelection}.`;
+      outcome += `You lose! ${computerSelection} beats ${playerSelection}.`;
     }
 
     resultDiv.textContent = outcome;
@@ -107,11 +142,11 @@
 
   function checkGameOver() {
     if (playerScore >= 5) {
-      resultDiv.textContent = "Congratulations! You won the game! ";
+      resultDiv.textContent += "\n\n Congratulations! You won the game! ";
       gameOver = true;
       restartBtn.style.display = "inline-block";
     } else if (computerScore >= 5) {
-      resultDiv.textContent = "Game over! The computer won. Try again!";
+      resultDiv.textContent += "\n\nGame over! The computer won. Try again!";
       gameOver = true;
       restartBtn.style.display = "inline-block";
     }
